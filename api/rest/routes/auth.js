@@ -41,15 +41,15 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   const body = req.body;
   try {
-    await login(body.email, body.password);
+    username = await login(body.email, body.password);
     var token = jwt.sign(
-      { name: "Mateusz", email: body.email, accessRight: ACCESS_USERS },
+      { name: username, email: body.email, accessRight: ACCESS_USERS },
       privateKey
     );
     res.json({
       Response: "Success",
       Token: token,
-      Name: "Mateusz",
+      Name: username,
       AccessRight: ACCESS_USERS,
     });
   } catch (e) {

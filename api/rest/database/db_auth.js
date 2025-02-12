@@ -115,7 +115,7 @@ const login = async (inputEmail, inputPassword) => {
     }
     console.log(result.password);
     if (await argon2.verify(result.password, password)) {
-      return;
+      return result.username;
     }
     throw new IncorrectLoginError();
   } catch (e) {
