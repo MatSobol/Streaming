@@ -1,0 +1,47 @@
+.streamContainer {
+    cursor: pointer;
+    position: relative;
+}
+
+.imagePlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 169px;
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color-translucent);
+}
+
+.imagePlaceholder > i {
+    font-size: 52px;
+    color: var(--bs-border-color-translucent);
+}
+
+.liveIcon {
+    position: absolute;
+    padding-inline: 8px;
+    padding-block: 3px;
+    font-size: 14px;
+    border-radius: var(--bs-border-radius);
+    top: 10px;
+    left: 12px;
+    color: white;
+    background-color: red;
+}
+
+.userIcon {
+    font-size: 45px;
+    height: 45px;
+    margin-right: 12px;
+}
+
+.userIcon::before {
+    vertical-align: top;
+}
+
+.textStream {
+    width: 211px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

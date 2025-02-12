@@ -1,0 +1,39 @@
+.modalVideoPreview {
+    cursor: pointer;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0,0,0,0.3);
+    z-index: 1040;
+}
+
+.videoDisplay {
+    position: relative;
+    object-fit: cover;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.volumeControl {
+    text-align: left;
+    padding-inline: 12px;
+    padding-block: 6px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    background-color: var(--bs-tertiary-bg);
+    border-radius: var(--bs-border-radius);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%,-100%);
+    z-index: 1;
+}
+
+.volumeControlContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

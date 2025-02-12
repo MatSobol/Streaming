@@ -1,0 +1,34 @@
+.dragAndDropInputContainer {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--bs-border-radius);
+    border: var(--bs-card-border-width) solid rgb(73, 80, 87);
+    overflow: hidden;
+}
+
+.previewImage{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
+
+.iconUpload {
+    font-size: 50px;
+}
+
+#thumbnailText {
+    font-size: 24px;
+}
+
+#dragAndDropHiddenInputElement{
+    display: none;
+}

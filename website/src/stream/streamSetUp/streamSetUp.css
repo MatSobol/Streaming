@@ -1,0 +1,16 @@
+.streamContainer .input-group-text {
+    min-width: 112px;
+}
+
+.streamContainer .input-group{
+    max-width: 392px;
+}
+
+textarea {
+    height: 38px;
+}
+
+.buttonAddTags {
+    background-color: rgb(50,50,52) !important;
+    padding-inline: 16px!important;
+}

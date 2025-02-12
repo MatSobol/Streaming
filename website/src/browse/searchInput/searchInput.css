@@ -1,0 +1,26 @@
+.searchIcon {
+    margin-top: -3px;
+}
+
+.searchInput {
+    position: relative;
+    width: 50% !important;
+    min-width: 300px;
+    max-width: 650px;
+}
+
+.close {
+    align-items: center;
+    justify-content: center;
+    line-height: 32px;
+    position: absolute;
+    font-size: 32px;
+    top: 50%;
+    left: calc(100% - 43px);
+    transform: translate(-100%, -50%);
+    z-index: 5;
+}
+
+.close:hover {
+    color: red;
+}

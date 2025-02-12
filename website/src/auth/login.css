@@ -1,0 +1,27 @@
+.googleIcon::before {
+    margin-bottom: 2.5px;
+}
+
+.googleButton {
+    background-color: DB4437 !important;
+}
+.facebookButton {
+    color: white !important;
+    background-color: #4267B2 !important;
+}
+.facebookButton:hover{
+    background-color: #385590 !important;
+}
+.facebookIcon::before{
+    margin-bottom: 2px;
+}
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+.eye {
+    cursor: pointer;
+    font-size: 20px;
+    top: 22%;
+    right: 6%;
+}

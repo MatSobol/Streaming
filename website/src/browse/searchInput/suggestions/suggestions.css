@@ -1,0 +1,37 @@
+ul {
+    width: 100%; 
+    list-style: none;    
+    margin: 0!important;
+    padding: 0!important;
+    text-align: left;
+}
+
+.suggestionList li { 
+    width: 100%;
+    padding: 5px 5px 7px 5px;
+    border-radius: var(--bs-border-radius); 
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.suggestionList li:hover { 
+    background-color: var(--bs-tertiary-bg);
+}
+
+.suggestionList {
+    width: 100%;
+    position: absolute !important;
+    top: 100%;
+    left: 0%;
+    z-index: 5;
+}
+
+.suggestionList .card-body {
+    padding-block: 5px;
+    padding-inline: 5px;
+}
+
+.suggestionTrash {
+    margin-left: auto;
+}

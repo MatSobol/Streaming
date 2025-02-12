@@ -1,0 +1,47 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  react-app:
+    build: 
+      context: ./website
+    ports:
+      - 3000:3000
+
+  media-server:
+    build:
+      context: ./api/media_server
+    ports:
+      - 8001:8001
+      - 1935:1935
+
+  rest:
+    build:
+      context: ./api/rest
+    ports:
+      - 8000:8000
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  ingest:
+    build:
+      context: ./api/ingest
+      target: final
+    ports:
+      - 4000:4000
+
+volumes:
+  mongo-data:
+    driver: local

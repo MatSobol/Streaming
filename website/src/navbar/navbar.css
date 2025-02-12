@@ -1,0 +1,15 @@
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+i:hover{
+    cursor: pointer;
+}
+@media (min-width: 992px) {
+    .nav-link:hover {
+        border-bottom: 0.125rem solid;
+    }
+    .nav-link.active {
+        border-bottom: 0.125rem solid;
+    }
+}
