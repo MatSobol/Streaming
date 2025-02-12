@@ -1,5 +1,6 @@
 /website/node_modules
 api/rest/node_modules/
+api/media_server/node_modules/
 api/rest/.env
 
 /node_modules
