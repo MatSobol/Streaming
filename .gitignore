@@ -1,4 +1,5 @@
 /website/node_modules
+/website/build
 api/rest/node_modules/
 api/media_server/node_modules/
 api/rest/.env
@@ -16,3 +17,5 @@ api/rest/.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+temp

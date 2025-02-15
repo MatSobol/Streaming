@@ -3,13 +3,22 @@ const express = require("express");
 const {
   addStream,
   getStreams,
-  startStream,
   stopStream,
 } = require("../database/db_stream.js");
+const { CustomError } = require("../error/customError.js");
 const verifyToken = require("../utility/verifyToken");
 const moulter = require("../utility/moulter");
-const { start } = require("repl");
 const router = express.Router();
+
+class UnAuthorizedAccessError extends CustomError {
+  constructor() {
+    super(
+      "UnAuthorizedAccessError",
+      403,
+      "You have no access to this end point"
+    );
+  }
+}
 
 router.post(
   "",
@@ -25,7 +34,8 @@ router.post(
       stream.account = req.user.name;
       const streamID = await addStream(stream);
       res.json({
-        Response: "Success", Id: streamID
+        Response: "Success",
+        Id: streamID,
       });
     } catch (e) {
       next(e);
@@ -34,22 +44,30 @@ router.post(
   }
 );
 
-router.get(
-  "/stop/:id",
-  verifyToken.verifyToken(0),
-  async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      await stopStream(id);
-      res.json({
-        Response: "Success"
-      });
-    } catch (e) {
-      next(e);
-      return;
+router.post("/stop/:id", async (req, res, next) => {
+  try {
+    console.log("stopping")
+    console.log(req.hostname)
+    if (req.hostname !== "rest") {
+      throw new UnAuthorizedAccessError();
     }
+    console.log(req.body)
+    const data = req.body;
+    console.log(data)
+    console.log(process.env.LOCAL_KEY)
+    if (data.key !== process.env.LOCAL_KEY) {
+      throw new UnAuthorizedAccessError();
+    }
+    const id = req.params.id;
+    await stopStream(id);
+    res.json({
+      Response: "Success",
+    });
+  } catch (e) {
+    next(e);
+    return;
   }
-);
+});
 
 router.get("", verifyToken.verifyToken(0), async (req, res, next) => {
   try {

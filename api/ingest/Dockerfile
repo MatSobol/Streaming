@@ -16,6 +16,7 @@ RUN --mount=type=cache,target=/go/pkg/mod/ \
     CGO_ENABLED=0 GOARCH=$TARGETARCH go build -o /bin/server ./cmd
 
 FROM alpine:latest AS final
+ENV LOCAL_KEY='j342l$1@d8cfds1$@UYG$^VGRF&*^d65GF3'
 
 RUN --mount=type=cache,target=/var/cache/apk \
     apk --update add \
@@ -35,6 +36,9 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 RUN mkdir /bin/rtp && chown -R appuser:appuser /bin/rtp
+
+
+
 USER appuser
 
 COPY --from=build /bin/server /bin/

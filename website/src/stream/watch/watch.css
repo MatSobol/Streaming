@@ -1,0 +1,25 @@
+.tags-container-watch-hidden {
+    overflow: hidden;
+    height: 38px;
+}
+
+.tags-container-watch {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, auto));
+    gap: 1em;
+}
+
+.watch-container {
+    width: 60%;
+}
+
+.icon-container-watch {
+    max-height: 38px;
+}
+
+@media (max-width: 992px) {
+    .watch-container{
+        width: 100%;
+    }
+}

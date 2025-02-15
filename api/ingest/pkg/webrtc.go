@@ -6,7 +6,10 @@ import (
 	"fmt"
 	"strings"
 	"net"
+	"net/http"
 	"errors"
+	"bytes"
+	"os"
 	"io"
 	"sync"
 
@@ -43,6 +46,17 @@ func Write(conn *websocket.Conn, c chan []byte) {
 }
 
 func Connect(conn *websocket.Conn, portList *PortList, streamId string) {
+
+	defer func(){
+		data := map[string]string{"key": os.Getenv("LOCAL_KEY")}
+		jsonData, _ := json.Marshal(data)
+	
+		_, err := http.Post("http://rest:8000/stream/stop/" + streamId, "application/json", bytes.NewBuffer(jsonData))
+		if err != nil {
+			fmt.Println("Error:", err)
+			panic(err)
+		}
+	}()
 
 	messageChannel := make(chan []byte)
 	ffmpegChannel := make(chan []byte)
