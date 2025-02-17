@@ -93,7 +93,7 @@ export const Streaming = () => {
           onClick={() => setRunning(true)}
         ></i>
       ) : (
-        <div className="d-flex justify-content-center gap-3 mt-3">
+        <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
           <i
             class="bi bi-stop-fill iconDanger"
             onClick={() => setRunning(false)}
@@ -110,10 +110,12 @@ export const Streaming = () => {
             ></i>
           )}
           {state.videoType === 1 && (
-            <VomuleSetUp
-              recordInfo={recordInfoState}
-              setRecordInfo={setRecordInfoState}
-            />
+            <div style={{height: "1.5rem"}}>
+              <VomuleSetUp
+                recordInfo={recordInfoState}
+                setRecordInfo={setRecordInfoState}
+              />
+            </div>
           )}
         </div>
       )}
