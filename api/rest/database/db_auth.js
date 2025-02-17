@@ -98,7 +98,6 @@ const loginThirdParty = async (inputEmail, inputUsername) => {
     if (e?.statusCode) {
       throw e;
     }
-    console.log(e.name);
     throw new DatabaseError();
   }
 };
@@ -113,7 +112,7 @@ const login = async (inputEmail, inputPassword) => {
     if (!result) {
       throw new IncorrectLoginError();
     }
-    console.log(result.password);
+
     if (await argon2.verify(result.password, password)) {
       return result.username;
     }

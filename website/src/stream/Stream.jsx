@@ -97,7 +97,6 @@ export const Stream = (recordInfo, videoType, setNoAudio) => {
     if (mediaStream[1]) {
       mediaStream[1].getTracks().forEach((track) => {
         if (track.kind === "audio") {
-          console.log(track.kind);
           track.enabled = !track.enabled;
         }
       });

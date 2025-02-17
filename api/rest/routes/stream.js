@@ -47,14 +47,10 @@ router.post(
 router.post("/stop/:id", async (req, res, next) => {
   try {
     console.log("stopping")
-    console.log(req.hostname)
     if (req.hostname !== "rest") {
       throw new UnAuthorizedAccessError();
     }
-    console.log(req.body)
     const data = req.body;
-    console.log(data)
-    console.log(process.env.LOCAL_KEY)
     if (data.key !== process.env.LOCAL_KEY) {
       throw new UnAuthorizedAccessError();
     }

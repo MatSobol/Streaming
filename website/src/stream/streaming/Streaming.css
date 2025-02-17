@@ -4,3 +4,17 @@
     max-width: 90vw;
     max-height: 90vh;
 }
+
+.iconSuccess {
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    background-color: #28a745;
+}
+
+.iconDanger {
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    background-color: #dc3545;
+}

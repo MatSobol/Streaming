@@ -2,8 +2,6 @@ import { useAuthHeader } from "react-auth-kit";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-import { Button } from "react-bootstrap";
-
 import { useDispatch } from "react-redux";
 import { successAlert, failAlert } from "@/store/slices/alertSlice";
 
@@ -12,7 +10,7 @@ import { useEffect, useState, useRef } from "react";
 import { rtcConnection } from "../rtcConnection";
 import { VomuleSetUp } from "../volumeSetUp/volumeSetUp";
 
-import "./Streaming.css"
+import "./Streaming.css";
 
 export const Streaming = () => {
   const dispatch = useDispatch();
@@ -20,6 +18,7 @@ export const Streaming = () => {
   const videoRef = useRef(null);
 
   const [running, setRunning] = useState(false);
+  const [isMicrophone, setIsMicrophone] = useState(true);
 
   const { state } = useLocation();
   const { streamInfo, recordInfo, videoType } = state;
@@ -75,8 +74,13 @@ export const Streaming = () => {
     };
   }, [running]);
 
+  const toggleMicrophone = () => {
+    StreamFun.toggleMicrophone();
+    setIsMicrophone((el) => !el);
+  };
+
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center">
       <video
         className="streamingVideoDisplay"
         ref={videoRef}
@@ -84,13 +88,27 @@ export const Streaming = () => {
         id="videoElement"
       ></video>
       {!running ? (
-        <Button className="mt-3 me-3" onClick={() => setRunning(true)}>
-          Start
-        </Button>
+        <i
+          class="bi bi-caret-right-fill mt-3 me-3 iconSuccess"
+          onClick={() => setRunning(true)}
+        ></i>
       ) : (
         <div className="d-flex justify-content-center gap-3 mt-3">
-          <Button onClick={() => setRunning(false)}>Stop</Button>
-          <Button onClick={() => StreamFun.toggleMicrophone()}>mute</Button>
+          <i
+            class="bi bi-stop-fill iconDanger"
+            onClick={() => setRunning(false)}
+          ></i>
+          {isMicrophone ? (
+            <i
+              class="bi bi-mic-mute-fill iconDanger"
+              onClick={() => toggleMicrophone()}
+            ></i>
+          ) : (
+            <i
+              class="bi bi-mic-fill iconSuccess"
+              onClick={() => toggleMicrophone()}
+            ></i>
+          )}
           {state.videoType === 1 && (
             <VomuleSetUp
               recordInfo={recordInfoState}
