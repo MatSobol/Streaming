@@ -231,7 +231,7 @@ func Connect(conn *websocket.Conn, portList *PortList, streamId string) {
 			zeroVal := uint16(0)
 			emptyStr := ""
 			if iceErr := peerConnection.AddICECandidate(webrtc.ICECandidateInit{
-				Candidate:     fmt.Sprintf("candidate:%s", parts[1]),
+				Candidate:     parts[1],
 				SDPMid:        &emptyStr,
 				SDPMLineIndex: &zeroVal,
 			});

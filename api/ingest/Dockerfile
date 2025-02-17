@@ -37,8 +37,6 @@ RUN adduser \
     appuser
 RUN mkdir /bin/rtp && chown -R appuser:appuser /bin/rtp
 
-
-
 USER appuser
 
 COPY --from=build /bin/server /bin/

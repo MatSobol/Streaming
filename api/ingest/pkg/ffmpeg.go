@@ -53,8 +53,7 @@ func Ffmpeg (c <-chan []byte, port int, streamId string) {
 		"-max_interleave_delta", "0",
 		"rtmp://media-server:1935/live/" + streamId,
 	)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stdout
+	
 	stdin, err := cmd.StdinPipe()
 
 	if err != nil {
