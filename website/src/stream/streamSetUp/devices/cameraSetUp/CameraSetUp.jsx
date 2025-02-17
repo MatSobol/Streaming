@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Form, InputGroup, Button, Dropdown } from "react-bootstrap";
 
-const POSSIBLE_RESOLUTIONS = [
-  "default",
-  "1280x720",
-  "1920x1080",
-  "2560x1440",
-  "3840x2160",
-];
+const POSSIBLE_RESOLUTIONS = ["default", "1280x720", "1920x1080"];
 
 export const CameraSetUp = ({ recordInfo, setRecordInfo, videoDevices }) => {
   const [customResolution, setCustomResolution] = useState(false);
@@ -34,7 +28,9 @@ export const CameraSetUp = ({ recordInfo, setRecordInfo, videoDevices }) => {
       <InputGroup className="mb-3">
         <InputGroup.Text>Video</InputGroup.Text>
         <Form.Select
-          onChange={(e) => setRecordInfo({ ...recordInfo, resolution: e.target.innerText })}
+          onChange={(e) =>
+            setRecordInfo({ ...recordInfo, resolution: e.target.innerText })
+          }
         >
           {videoDevices}
         </Form.Select>
@@ -55,7 +51,10 @@ export const CameraSetUp = ({ recordInfo, setRecordInfo, videoDevices }) => {
           <Form.Control
             value={recordInfo.resolution}
             onChange={(e) =>
-              setRecordInfo({ ...recordInfo, resolution: e.currentTarget.value })
+              setRecordInfo({
+                ...recordInfo,
+                resolution: e.currentTarget.value,
+              })
             }
           />
           <Dropdown>

@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState, useRef } from "react";
 import { Stream } from "../../../Stream";
-import { VomuleSetUp } from "../volumeSetUp/volumeSetUp";
+import { VomuleSetUp } from "../../../volumeSetUp/volumeSetUp";
 import { useDispatch } from "react-redux";
 import { failAlert } from "@/store/slices/alertSlice";
 import "./preview.css";

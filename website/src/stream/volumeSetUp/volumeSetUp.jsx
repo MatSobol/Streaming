@@ -49,17 +49,26 @@ export const VomuleSetUp = ({
     <>
       <div className="d-flex">
         <VolumeIcon />
-        <Form.Range
-          ref={volumeControlRef}
-          value={recordInfo.screenVolume}
-          onChange={(e) =>
-            setRecordInfo({ ...recordInfo, screenVolume: e.target.value })
-          }
-          min={0.0}
-          max={1.5}
-          step={0.01}
-          disabled={noAudio}
-        />
+        <div className="volumeRangeContainer">
+          <Form.Range
+            className="volumeInputRange"
+            ref={volumeControlRef}
+            value={recordInfo.screenVolume}
+            onChange={(e) =>
+              setRecordInfo({ ...recordInfo, screenVolume: e.target.value })
+            }
+            min={0.0}
+            max={1.5}
+            step={0.01}
+            disabled={noAudio}
+          />
+          <div
+            className="volumeInfo"
+            style={{ left: (recordInfo.screenVolume / 1.5) * 100 + "%" }}
+          >
+            {recordInfo.screenVolume}
+          </div>
+        </div>
       </div>
     </>
   );

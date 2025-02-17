@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 
-export const Stream = (recordInfo, videoType, setNoAudio, randNum) => {
-  const [widthVideo, heightVideo] = recordInfo.resolution.split("x");
+export const Stream = (recordInfo, videoType, setNoAudio) => {
+  const [widthVideo, heightVideo] = recordInfo.resolution?.split("x");
   const [mediaStream, setMediaStream] = useState([]);
   const gainNodeRef = useRef(null);
   const audioContextRef = useRef(null);
-  const rnum = randNum;
+
+  console.log("StreamFun init");
 
   // for default will give widthVideo = "default" and heightVideo=undefined
   const constraintsVideoType = {
@@ -21,6 +22,8 @@ export const Stream = (recordInfo, videoType, setNoAudio, randNum) => {
     video: {
       logicalSurface: true,
       cursor: "always",
+      width: { max: 1920 },
+      height: { max: 1080 },
     },
     audio: true,
   };
@@ -83,9 +86,21 @@ export const Stream = (recordInfo, videoType, setNoAudio, randNum) => {
     }
     if (mediaStream.length !== 0) {
       mediaStream.forEach((el) => {
+        if (!el) return;
         el.getTracks().forEach((track) => track.stop());
       });
       setMediaStream([]);
+    }
+  };
+
+  const toggleMicrophone = () => {
+    if (mediaStream[1]) {
+      mediaStream[1].getTracks().forEach((track) => {
+        if (track.kind === "audio") {
+          console.log(track.kind);
+          track.enabled = !track.enabled;
+        }
+      });
     }
   };
 
@@ -95,7 +110,7 @@ export const Stream = (recordInfo, videoType, setNoAudio, randNum) => {
       const localStream = await navigator.mediaDevices.getUserMedia(
         constraintsVideoType
       );
-      setMediaStream([localStream]);
+      setMediaStream([undefined, localStream]);
       preparedStream = localStream;
     } else {
       preparedStream = await screenMediaStream();
@@ -106,5 +121,6 @@ export const Stream = (recordInfo, videoType, setNoAudio, randNum) => {
   return {
     stopMediaStream: stopMediaStream,
     fetchMediaStream: fetchMediaStream,
+    toggleMicrophone: toggleMicrophone,
   };
 };

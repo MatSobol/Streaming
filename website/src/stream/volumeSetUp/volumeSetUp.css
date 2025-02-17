@@ -1,0 +1,26 @@
+.screenVolumeIcon {
+    position: relative;
+    top: -4px;
+    font-size: 24px;
+    line-height: 24px;
+    margin-right: 10px;
+}
+
+.volumeRangeContainer{
+    width: 100%;
+    position: relative;
+}
+
+.volumeInputRange:active + .volumeInfo {
+    display: block;
+}
+
+.volumeInfo{
+    display: none;
+    position: absolute;
+    top: -10px;
+    transform: translate(-50%,-100%);
+    background-color: var(--bs-tertiary-bg);
+    padding: .375rem .75rem;
+    border-radius: var(--bs-border-radius);
+}

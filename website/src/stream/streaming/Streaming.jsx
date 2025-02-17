@@ -10,6 +10,9 @@ import { successAlert, failAlert } from "@/store/slices/alertSlice";
 import { Stream } from "../Stream";
 import { useEffect, useState, useRef } from "react";
 import { rtcConnection } from "../rtcConnection";
+import { VomuleSetUp } from "../volumeSetUp/volumeSetUp";
+
+import "./Streaming.css"
 
 export const Streaming = () => {
   const dispatch = useDispatch();
@@ -20,8 +23,8 @@ export const Streaming = () => {
 
   const { state } = useLocation();
   const { streamInfo, recordInfo, videoType } = state;
-
-  const StreamFun = Stream(recordInfo, videoType, (el) => {});
+  const [recordInfoState, setRecordInfoState] = useState(recordInfo);
+  const StreamFun = Stream(recordInfoState, videoType, (el) => {});
 
   const auth = useAuthHeader();
   const streamUrl =
@@ -57,29 +60,25 @@ export const Streaming = () => {
       return;
     }
     let ws, pc, streamId;
-    const startMediaStream = async () => {
+    const startMediaStream = async (StreamFun) => {
       streamId = await addStream();
       const mediaStream = await StreamFun.fetchMediaStream();
       videoRef.current.srcObject = mediaStream;
       [ws, pc] = rtcConnection(mediaStream, streamId);
     };
-    startMediaStream();
+    startMediaStream(StreamFun);
     return () => {
       console.log("closing webrtc connection");
       ws.send("close");
       ws.close();
-      axios.get(`${streamUrl}/stop/${streamId}`, {
-        headers: {
-          authorization: auth(),
-        },
-      });
+      pc.close();
     };
   }, [running]);
 
   return (
     <div>
       <video
-        className="videoDisplay"
+        className="streamingVideoDisplay"
         ref={videoRef}
         autoPlay={true}
         id="videoElement"
@@ -89,9 +88,16 @@ export const Streaming = () => {
           Start
         </Button>
       ) : (
-        <Button className="mt-3" onClick={() => setRunning(false)}>
-          Stop
-        </Button>
+        <div className="d-flex justify-content-center gap-3 mt-3">
+          <Button onClick={() => setRunning(false)}>Stop</Button>
+          <Button onClick={() => StreamFun.toggleMicrophone()}>mute</Button>
+          {state.videoType === 1 && (
+            <VomuleSetUp
+              recordInfo={recordInfoState}
+              setRecordInfo={setRecordInfoState}
+            />
+          )}
+        </div>
       )}
     </div>
   );

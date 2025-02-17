@@ -13,7 +13,7 @@
 
 .videoDisplay {
     position: relative;
-    object-fit: cover;
+    object-fit: contain;
     max-width: 90vw;
     max-height: 90vh;
 }
