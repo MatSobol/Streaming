@@ -37,7 +37,7 @@ export const SearchInput = ({ streams, setStreamsFiltered }) => {
       setStreamsFiltered([...streams]);
       return;
     }
-    setStreamsFiltered([...streams.filter((el) => el.title === searchValue)]);
+    setStreamsFiltered([...streams.filter((el) => el.title.startsWith(searchValue))]);
   };
 
   const search = (searchedTitle) => {
